@@ -1,0 +1,879 @@
+@import url("https://fonts.googleapis.com/css2?family=Lilita+One&family=Nunito:wght@600;800&display=swap");
+
+:root {
+  --ink: #1b1033;
+  --paper: #fff7ee;
+  --pink: #ff4d8d;
+  --orange: #ff8a3d;
+  --yellow: #ffe14d;
+  --cyan: #3de0c5;
+  --violet: #7c5cff;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html,
+body,
+#app {
+  min-height: 100%;
+}
+
+body {
+  margin: 0;
+  color: var(--paper);
+  font-family: Nunito, system-ui, sans-serif;
+  font-weight: 600;
+  line-height: 1.4;
+  background:
+    radial-gradient(circle at 15% 10%, #ff4d8d 0%, transparent 40%),
+    radial-gradient(circle at 90% 20%, #7c5cff 0%, transparent 42%),
+    radial-gradient(circle at 50% 100%, #ff8a3d 0%, transparent 45%),
+    #16082c;
+}
+
+.app {
+  min-height: 100dvh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
+}
+
+.card {
+  width: min(100%, 28rem);
+  padding: 1.5rem;
+  border-radius: 1.5rem;
+  background: rgba(22, 8, 44, 0.72);
+  border: 3px solid rgba(255, 247, 238, 0.18);
+  box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(8px);
+}
+
+h1 {
+  font-family: "Lilita One", sans-serif;
+  font-size: clamp(2.4rem, 8vw, 3.4rem);
+  margin: 0 0 0.4rem;
+  letter-spacing: 0.02em;
+}
+
+.eyebrow {
+  margin: 0 0 0.35rem;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.8rem;
+  color: var(--yellow);
+}
+
+.lede,
+.status,
+.empty {
+  margin: 0 0 1.25rem;
+  font-size: 1.15rem;
+}
+
+.status {
+  color: var(--cyan);
+}
+
+.button-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  margin-top: 1.5rem;
+}
+
+.btn {
+  width: 100%;
+  min-height: 3.6rem;
+  border: 0;
+  border-radius: 999px;
+  font-family: inherit;
+  font-size: 1.2rem;
+  font-weight: 800;
+  cursor: pointer;
+  color: var(--ink);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.btn-host {
+  background: linear-gradient(90deg, var(--yellow), var(--orange));
+}
+
+.btn-join {
+  background: linear-gradient(90deg, var(--cyan), #5ee0ff);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--paper);
+  border: 2px solid rgba(255, 247, 238, 0.35);
+}
+
+.join-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+label {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+input {
+  min-height: 3.4rem;
+  padding: 0.75rem 1rem;
+  border: 3px solid rgba(255, 247, 238, 0.25);
+  border-radius: 1rem;
+  background: rgba(255, 247, 238, 0.08);
+  color: var(--paper);
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+input::placeholder {
+  color: rgba(255, 247, 238, 0.4);
+}
+
+.room-code {
+  margin: 0.2rem 0 0.6rem;
+  font-family: "Lilita One", sans-serif;
+  font-size: clamp(4.5rem, 18vw, 8rem);
+  letter-spacing: 0.18em;
+  line-height: 1;
+  text-align: center;
+  color: var(--yellow);
+  text-shadow: 0 8px 0 var(--pink);
+}
+
+.player-list {
+  list-style: none;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.player-list li {
+  padding: 0.85rem 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 77, 141, 0.22);
+  font-size: 1.25rem;
+}
+
+.player-name {
+  font-weight: 800;
+}
+
+/* Host / TV: bigger type and a wider card. */
+.app-host {
+  padding: 2rem;
+}
+
+.app-host .card {
+  width: min(100%, 52rem);
+  padding: 2.5rem;
+}
+
+.app-host .player-list li {
+  font-size: 1.7rem;
+}
+
+@media (min-width: 800px) {
+  .app-host .player-list {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Step 2: gameplay screens                                            */
+/* ------------------------------------------------------------------ */
+
+h2.section-title {
+  margin: 1.5rem 0 0.6rem;
+  font-size: 0.95rem;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--yellow);
+}
+
+.center {
+  text-align: center;
+}
+
+.error {
+  margin: 1rem 0 0;
+  padding: 0.75rem 1rem;
+  border-radius: 1rem;
+  background: rgba(255, 77, 141, 0.25);
+  border: 2px solid var(--pink);
+}
+
+/* Category and round pickers */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+}
+
+.segmented {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 0.55rem;
+}
+
+.segmented.two {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.segmented.three {
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.55rem;
+}
+
+.chip {
+  min-height: 2.9rem;
+  padding: 0.5rem 1.05rem;
+  border-radius: 999px;
+  border: 2px solid rgba(255, 247, 238, 0.3);
+  background: rgba(255, 247, 238, 0.06);
+  color: var(--paper);
+  font-family: inherit;
+  font-size: 1.05rem;
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.chip.selected {
+  background: var(--yellow);
+  border-color: var(--yellow);
+  color: var(--ink);
+}
+
+/* Host stage (playing / reveal / final) */
+.stage {
+  text-align: center;
+}
+
+.stage .button-stack,
+.stage > .btn {
+  margin-top: 1.5rem;
+}
+
+.vinyl {
+  width: clamp(8rem, 26vw, 13rem);
+  aspect-ratio: 1;
+  margin: 1rem auto 1.5rem;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle, var(--pink) 0 14%, #111 15% 17%, transparent 18%),
+    repeating-radial-gradient(circle, #1a1a1a 0 2px, #2a2a2a 3px 5px);
+  box-shadow: 0 0 0 6px rgba(255, 247, 238, 0.12), 0 20px 40px rgba(0, 0, 0, 0.4);
+  animation: spin 2.2s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  width: 3.5rem;
+  height: 3.5rem;
+  margin: 1rem auto 1.25rem;
+  border-radius: 50%;
+  border: 6px solid rgba(255, 247, 238, 0.2);
+  border-top-color: var(--yellow);
+  animation: spin 0.9s linear infinite;
+}
+
+/* Countdown bar */
+.countdown {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  margin: 0.75rem 0 1.25rem;
+}
+
+.countdown-track {
+  flex: 1;
+  height: 0.9rem;
+  border-radius: 999px;
+  background: rgba(255, 247, 238, 0.15);
+  overflow: hidden;
+}
+
+.countdown-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--cyan), var(--yellow));
+  transform-origin: left;
+  transition: transform 0.1s linear;
+}
+
+.countdown-fill.urgent {
+  background: var(--pink);
+}
+
+.countdown-number {
+  min-width: 2ch;
+  font-family: "Lilita One", sans-serif;
+  font-size: 1.6rem;
+}
+
+.countdown.big .countdown-track {
+  height: 1.4rem;
+}
+
+.countdown.big .countdown-number {
+  font-size: 2.6rem;
+}
+
+/* Player answer buttons */
+.choice-grid {
+  display: grid;
+  gap: 0.75rem;
+}
+
+.choice {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.15rem;
+  min-height: 5rem;
+  padding: 0.9rem 1.1rem;
+  border: 0;
+  border-radius: 1.2rem;
+  text-align: left;
+  color: var(--ink);
+  font-family: inherit;
+  cursor: pointer;
+  transition: transform 0.12s ease, opacity 0.2s ease;
+}
+
+.choice:active {
+  transform: scale(0.97);
+}
+
+.choice-0 { background: var(--yellow); }
+.choice-1 { background: var(--cyan); }
+.choice-2 { background: #ff9ec2; }
+.choice-3 { background: #b9a8ff; }
+
+.choice-title {
+  font-size: 1.2rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.choice-artist {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+.choice.picked {
+  outline: 4px solid var(--paper);
+  outline-offset: 3px;
+}
+
+.choice.dim {
+  opacity: 0.3;
+}
+
+.choice:disabled {
+  cursor: default;
+}
+
+/* Reveal */
+.cover {
+  display: block;
+  width: clamp(10rem, 30vw, 16rem);
+  aspect-ratio: 1;
+  object-fit: cover;
+  margin: 0.5rem auto 1rem;
+  border-radius: 1rem;
+  box-shadow: 0 16px 40px rgba(0, 0, 0, 0.45);
+}
+
+.cover.small {
+  width: 5rem;
+  margin: 0;
+}
+
+.song-title {
+  margin: 0;
+  font-family: "Lilita One", sans-serif;
+  font-size: clamp(2rem, 6vw, 3rem);
+  line-height: 1.1;
+}
+
+.song-title.small {
+  font-size: 1.4rem;
+}
+
+.song-artist {
+  margin: 0.2rem 0 1rem;
+  font-size: 1.25rem;
+  color: var(--yellow);
+}
+
+.answer-row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin: 0.5rem 0 1.25rem;
+}
+
+.answer-row .song-artist {
+  margin-bottom: 0;
+}
+
+.verdict {
+  margin: 0.5rem 0 1rem;
+  font-family: "Lilita One", sans-serif;
+  font-size: 2.6rem;
+}
+
+.verdict.ok {
+  color: var(--cyan);
+}
+
+.verdict.miss {
+  color: var(--pink);
+}
+
+.results,
+.leaderboard {
+  list-style: none;
+  margin: 0 0 1rem;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+  text-align: left;
+}
+
+.results li,
+.leaderboard li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: 0.6rem 1rem;
+  border-radius: 0.9rem;
+  font-size: 1.2rem;
+  font-weight: 800;
+}
+
+.results li.ok {
+  background: rgba(61, 224, 197, 0.25);
+}
+
+.results li.miss {
+  background: rgba(255, 247, 238, 0.07);
+  opacity: 0.75;
+}
+
+.leaderboard li {
+  background: rgba(124, 92, 255, 0.25);
+}
+
+.app-host .results li,
+.app-host .leaderboard li {
+  font-size: 1.5rem;
+}
+
+/* Podium */
+.podium {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-items: end;
+  gap: 0.5rem;
+  margin: 1rem 0 1.5rem;
+  text-align: center;
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  min-width: 0;
+}
+
+.step-name {
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.step-score {
+  font-size: 0.95rem;
+  opacity: 0.8;
+}
+
+.step-block {
+  width: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 0.4rem;
+  border-radius: 0.8rem 0.8rem 0 0;
+  font-family: "Lilita One", sans-serif;
+  font-size: 2rem;
+  color: var(--ink);
+}
+
+.step-1 .step-block { height: 7rem; background: var(--yellow); }
+.step-2 .step-block { height: 5rem; background: #d9d9e6; }
+.step-3 .step-block { height: 3.6rem; background: var(--orange); }
+
+.app-host .step-name {
+  font-size: 1.6rem;
+}
+
+/* Player header */
+.player-header {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+  font-size: 0.9rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  opacity: 0.8;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .vinyl,
+  .spinner {
+    animation: none;
+  }
+}
+
+/* ------------------------------------------------------------------ */
+/* Step 3: buzzers, play styles                                        */
+/* ------------------------------------------------------------------ */
+
+h2.section-title.first {
+  margin-top: 0;
+}
+
+.hint {
+  margin: 0.6rem 0 0;
+  font-size: 0.95rem;
+  opacity: 0.75;
+}
+
+.chip:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+.soon {
+  margin-left: 0.4rem;
+  padding: 0.05rem 0.45rem;
+  border-radius: 999px;
+  background: rgba(255, 247, 238, 0.18);
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+.add-name {
+  display: flex;
+  gap: 0.6rem;
+  margin-bottom: 1rem;
+}
+
+.add-name input {
+  flex: 1;
+  min-width: 0;
+}
+
+.add-name .btn {
+  width: auto;
+  padding: 0 1.4rem;
+}
+
+.player-list li.removable {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.remove {
+  width: 2.2rem;
+  height: 2.2rem;
+  border: 0;
+  border-radius: 50%;
+  background: rgba(255, 247, 238, 0.15);
+  color: var(--paper);
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+/* The giant phone buzzer */
+.buzzer {
+  display: block;
+  width: min(72vw, 18rem);
+  aspect-ratio: 1;
+  margin: 1.5rem auto 1.75rem;
+  border: 0;
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 30%, #ff8fb5, var(--pink) 45%, #c4185a);
+  box-shadow:
+    0 14px 0 #8c0f40,
+    0 24px 40px rgba(0, 0, 0, 0.45);
+  color: var(--paper);
+  font-family: "Lilita One", sans-serif;
+  font-size: clamp(2.8rem, 14vw, 4rem);
+  letter-spacing: 0.06em;
+  text-shadow: 0 3px 0 rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  touch-action: manipulation;
+  user-select: none;
+  -webkit-user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: transform 0.06s ease, box-shadow 0.06s ease;
+}
+
+.buzzer:active {
+  transform: translateY(10px);
+  box-shadow:
+    0 4px 0 #8c0f40,
+    0 10px 20px rgba(0, 0, 0, 0.4);
+}
+
+.locked {
+  margin: 2rem 0;
+  text-align: center;
+}
+
+/* Someone buzzed */
+.buzz-name {
+  margin: 1rem 0 0;
+  font-family: "Lilita One", sans-serif;
+  font-size: clamp(3rem, 14vw, 6rem);
+  line-height: 1;
+  text-align: center;
+  color: var(--yellow);
+  text-shadow: 0 6px 0 var(--pink);
+  animation: pop 0.35s ease-out;
+}
+
+.buzz-sub {
+  margin: 0.6rem 0 1.25rem;
+  font-size: 1.4rem;
+  text-align: center;
+}
+
+.stage.buzzed,
+.card.me-buzzed {
+  border-color: var(--yellow);
+  animation: flash 0.5s ease-out 2;
+}
+
+@keyframes pop {
+  from {
+    transform: scale(0.6);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+@keyframes flash {
+  50% {
+    box-shadow: 0 0 0 8px var(--yellow), 0 18px 50px rgba(0, 0, 0, 0.35);
+  }
+}
+
+/* Who got it? */
+.award-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+}
+
+.btn.award {
+  min-height: 3.4rem;
+  background: var(--cyan);
+}
+
+.btn.award.suggested {
+  background: linear-gradient(90deg, var(--yellow), var(--orange));
+}
+
+.btn.award.btn-ghost {
+  background: transparent;
+}
+
+.leaderboard.compact li {
+  padding: 0.4rem 0.9rem;
+  font-size: 1.05rem;
+}
+
+.app-host .leaderboard.compact li {
+  font-size: 1.15rem;
+}
+
+.toast {
+  margin: 0 0 0.75rem;
+  padding: 0.5rem 1rem;
+  border-radius: 999px;
+  background: rgba(255, 247, 238, 0.12);
+  text-align: center;
+  font-weight: 800;
+  animation: pop 0.35s ease-out;
+}
+
+.toast.ok {
+  background: var(--cyan);
+  color: var(--ink);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .buzz-name,
+  .toast,
+  .stage.buzzed,
+  .card.me-buzzed {
+    animation: none;
+  }
+}
+
+/* Equal width pickers: let labels shrink instead of overflowing. */
+.segmented .chip {
+  min-width: 0;
+  padding: 0.5rem 0.25rem;
+}
+
+/* Host screen on a phone: less padding so everything fits. */
+@media (max-width: 600px) {
+  .app-host {
+    padding: 0.75rem;
+  }
+
+  .app-host .card {
+    padding: 1.25rem;
+  }
+
+  .app-host .player-list li {
+    font-size: 1.25rem;
+  }
+}
+
+/* Host playing too */
+.host-me {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 0.5rem;
+  border-radius: 1rem;
+  background: rgba(61, 224, 197, 0.2);
+  font-size: 1.15rem;
+}
+
+.join-at {
+  margin-top: 1.5rem;
+}
+
+/* Grouped genre picker */
+.chip-group {
+  margin-bottom: 0.9rem;
+}
+
+.group-title {
+  margin: 0 0 0.45rem;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  opacity: 0.7;
+}
+
+.section-title .link {
+  margin-left: 0.6rem;
+  padding: 0;
+  border: 0;
+  background: none;
+  color: var(--paper);
+  font: inherit;
+  font-size: 0.8rem;
+  text-decoration: underline;
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+/* Find the year */
+.year-picker {
+  margin: 0.75rem 0 1rem;
+  text-align: center;
+}
+
+.year-big {
+  margin: 0.25rem 0 0.5rem;
+  font-family: "Lilita One", sans-serif;
+  font-size: clamp(4rem, 20vw, 6.5rem);
+  line-height: 1;
+  text-align: center;
+  color: var(--yellow);
+  text-shadow: 0 6px 0 var(--pink);
+}
+
+.year-big.locked {
+  color: var(--cyan);
+}
+
+.year-slider {
+  width: 100%;
+  min-height: 0;
+  height: 2.6rem;
+  margin: 0.5rem 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  accent-color: var(--yellow);
+}
+
+.year-steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+}
+
+.year-steps .chip {
+  padding: 0.5rem 0;
+  min-width: 0;
+}
+
+.results small {
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+.reveal .leaderboard {
+  margin-top: 1.25rem;
+}
