@@ -12,7 +12,7 @@
 import type { DeezerTrack } from "./deezer";
 
 const USER_AGENT =
-  "FridayNightBlindTest/1.0 ( https://blindtest.fridaynight.workers.dev )";
+  "Geekasong/1.0 ( https://geekasong.com )";
 const MIN_YEAR = 1900;
 
 /* ---------------- polite MusicBrainz queue ---------------- */

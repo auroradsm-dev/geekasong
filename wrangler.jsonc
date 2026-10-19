@@ -4,7 +4,9 @@
   "name": "blindtest",
   "main": "src/server.ts",
   "compatibility_date": "2026-09-01",
-  // Your own domain (with and without www). The workers.dev link keeps working too.
+  // Keep the backup link https://blindtest.fridaynight.workers.dev working too.
+  "workers_dev": true,
+  // Your own domain (with and without www).
   "routes": [
     { "pattern": "geekasong.com", "custom_domain": true },
     { "pattern": "www.geekasong.com", "custom_domain": true }
@@ -12,7 +14,7 @@
   "assets": {
     "directory": "./public",
     "not_found_handling": "single-page-application",
-    "run_worker_first": ["/parties/*"]
+    "run_worker_first": ["/parties/*", "/face/*", "/face-debug"]
   },
   "durable_objects": {
     "bindings": [{ "name": "Main", "class_name": "BlindTestServer" }]
