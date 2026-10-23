@@ -49,4 +49,4 @@ I wanted a music quiz to play with friends and family at weekends: all ages, all
 
 ## What's next
 
-The backlog is in [ROADMAP.md](ROADMAP.md): difficulty levels, a pixelated famous faces mode that sharpens over time, and non music rounds.
+Difficulty levels, a pixelated famous faces mode that sharpens over time, and non music rounds.
