@@ -6,7 +6,7 @@ A realtime party quiz for music nights. One device plays the music, everyone els
 
 Built and run by me as a product builder: I scoped it, designed the game rules, wrote it with AI coding tools (Cursor, Claude) and run it in production on Cloudflare.
 
-**Product thinking:** the decisions behind it are in [PRODUCT.md](PRODUCT.md), and what's next in [ROADMAP.md](ROADMAP.md).
+**Product thinking:** the decisions behind it are in [PRODUCT.md](PRODUCT.md).
 
 ## Game modes
 
